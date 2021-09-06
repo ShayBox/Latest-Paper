@@ -16,53 +16,35 @@ type Projects struct {
 	Projects []string `json:"projects"`
 }
 
-type Groups struct {
-	ProjectID     string   `json:"project_id"`
-	ProjectName   string   `json:"project_name"`
+type Base struct {
+	ProjectID   string `json:"project_id"`
+	ProjectName string `json:"project_name"`
+}
+
+type Project struct {
+	Base
 	VersionGroups []string `json:"version_groups"`
 	Versions      []string `json:"versions"`
 }
 
-type Versions struct {
-	ProjectID    string   `json:"project_id"`
-	ProjectName  string   `json:"project_name"`
+type Group struct {
+	Base
 	VersionGroup string   `json:"version_group"`
 	Versions     []string `json:"versions"`
 }
 
-type Builds struct {
-	ProjectID   string `json:"project_id"`
-	ProjectName string `json:"project_name"`
-	Version     string `json:"version"`
-	Builds      []int  `json:"builds"`
+type Version struct {
+	Base
+	Version string `json:"version"`
+	Builds  []int  `json:"builds"`
 }
 
 type Build struct {
-	ProjectID   string    `json:"project_id"`
-	ProjectName string    `json:"project_name"`
-	Version     string    `json:"version"`
-	Build       int       `json:"build"`
-	Time        time.Time `json:"time"`
-	Changes     []struct {
-		Commit  string `json:"commit"`
-		Summary string `json:"summary"`
-		Message string `json:"message"`
-	} `json:"changes"`
-	Downloads struct {
-		Application struct {
-			Name   string `json:"name"`
-			Sha256 string `json:"sha256"`
-		} `json:"application"`
-	} `json:"downloads"`
-}
-
-type Downloads struct {
-	ProjectID   string    `json:"project_id"`
-	ProjectName string    `json:"project_name"`
-	Version     string    `json:"version"`
-	Build       int       `json:"build"`
-	Time        time.Time `json:"time"`
-	Changes     []struct {
+	Base
+	Version string    `json:"version"`
+	Build   int       `json:"build"`
+	Time    time.Time `json:"time"`
+	Changes []struct {
 		Commit  string `json:"commit"`
 		Summary string `json:"summary"`
 		Message string `json:"message"`
@@ -168,7 +150,7 @@ func GetGroups(project string) ([]string, error) {
 		return []string{}, err
 	}
 
-	var data Groups
+	var data Project
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []string{}, err
@@ -190,7 +172,7 @@ func GetVersions(project string, group string) ([]string, error) {
 		return []string{}, err
 	}
 
-	var data Versions
+	var data Group
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []string{}, err
@@ -212,7 +194,7 @@ func GetBuilds(project string, version string) ([]string, error) {
 		return []string{}, err
 	}
 
-	var data Builds
+	var data Version
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []string{}, err
@@ -239,7 +221,7 @@ func GetName(project string, version string, build string) (string, error) {
 		return "", err
 	}
 
-	var data Downloads
+	var data Build
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return "", err
