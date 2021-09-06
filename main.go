@@ -80,6 +80,7 @@ func main() {
 	var group = flag.String("group", "latest", "Version group X.XX, latest to use latest")
 	var version = flag.String("version", "latest", "Subversion X.XX.X, latest to use latest version")
 	var build = flag.String("build", "latest", "Build of version, latest to use latest build")
+	var output = flag.String("output", "source", "Output file name, source to use source name")
 	var verbose = flag.Bool("verbose", false, "Verbose output")
 	flag.Parse()
 
@@ -88,6 +89,7 @@ func main() {
 		fmt.Printf("Group: %v\n", *group)
 		fmt.Printf("Version: %v\n", *version)
 		fmt.Printf("Build: %v\n", *build)
+		fmt.Printf("Output: %v\n", *output)
 	}
 
 	if *group == "latest" {
@@ -123,8 +125,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	if *output == "source" {
+		*output = name
+	}
+
 	remote := fmt.Sprintf("https://papermc.io/api/v2/projects/%s/versions/%s/builds/%s/downloads/%s", *project, *version, *build, name)
-	DownloadFile(name, remote)
+	DownloadFile(*output, remote)
 }
 
 func GetProjects() ([]string, error) {
