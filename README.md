@@ -9,6 +9,21 @@
 
 # LatestPaper
 
-A simple Rust program that downloads the latest PaperMC
+Rust CLI wrapper to download PaperMC
+
+## Usage:
+```
+Usage: latest-paper [OPTIONS]
+
+Options:
+  -p, --project <PROJECT>    [default: paper]
+      --projects             List available projects
+  -v, --version <VERSION>    Minecraft version [default: latest]
+  -b, --build <BUILD>        Build of version [default: -1]
+  -d, --download <DOWNLOAD>  [default: application]
+      --downloads            List available downloads
+  -o, --output <OUTPUT>      Output file name [default: source]
+  -h, --help                 Print help information
+```
 
 [Download](https://github.com/ShayBox/LatestPaper/releases/latest)
