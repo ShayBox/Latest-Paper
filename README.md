@@ -9,7 +9,7 @@
 
 # LatestPaper
 
-Rust CLI wrapper to download PaperMC
+Command line wrapper to download PaperMC
 
 ## Usage:
 ```

@@ -1,20 +1,23 @@
 [package]
 name = "latest-paper"
-version = "2.0.1"
+version = "2.1.0"
 authors = ["Shayne Hartford <shaybox@shaybox.com>"]
 edition = "2021"
-description = "Rust CLI wrapper to download PaperMC"
+description = "Command line wrapper to download PaperMC"
+readme = "README.md"
+repository = "https://github.com/ShayBox/LatestPaper"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.0.29", features = ["derive"] }
-paper-mc = { git = "https://github.com/ShayBoxs-Forks/paper-mc-rs.git", version = "0.1.0" }
-tokio = "1.23.0"
+clap = { version = "4.1.8", features = ["derive"] }
+paper-mc = { git = "https://github.com/ShayBoxs-Forks/paper-mc-rs.git" }
+tokio = { version = "1.26.0", features = ["macros"] }
 
+# https://github.com/johnthagen/min-sized-rust
 [profile.release]
-strip = true
-opt-level = "z"
+strip = true      # Automatically strip symbols from the binary.
+opt-level = "z"   # Optimize for size.
 lto = true
 codegen-units = 1
-panic = "abort"
