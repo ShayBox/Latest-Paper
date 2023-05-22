@@ -11,9 +11,9 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.1.8", features = ["derive"] }
+clap = { version = "4.3", features = ["derive"] }
 paper-mc = { git = "https://github.com/ShayBoxs-Forks/paper-mc-rs.git" }
-tokio = { version = "1.26.0", features = ["macros"] }
+tokio = { version = "1.28", features = ["macros"] }
 
 # https://github.com/johnthagen/min-sized-rust
 [profile.release]
